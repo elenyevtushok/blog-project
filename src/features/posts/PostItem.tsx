@@ -3,22 +3,29 @@ import { Post } from './dto/Post'
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { deletePost } from './postsSlice';
 import { selectUserById } from '../users/usersSlice';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { PostEditModal } from './PostEditModal';
-import { loadComments, selectComments, selectCommentsById } from '../comments/commentsSlice';
-import { store } from '../../app/store';
-import { getCommentsApi } from 'api/comments-api';
-import { useQuery } from 'react-query';
+import { selectComments, upsertComments } from '../comments/commentsSlice';
+import { getCommentsApi } from '../../api/comments-api';
+import { useQuery } from '@tanstack/react-query';
 
-export const PostItem = ({ post}: { post: Post }) => {
+
+export const PostItem = ({ post }: { post: Post }) => {
 	const [openEditModal, setOpenEditModal] = useState(false)
 	const hideEditModal = () => {
 		setOpenEditModal(false)
 	}
 
-
 	const dispatch = useAppDispatch();
 	const user = useAppSelector(state => selectUserById(state, post.userId));
+
+	useQuery({
+		queryKey: ['comments', post.id],
+		queryFn: () => getCommentsApi(post.id),
+		onSuccess: ((comments) => {
+			dispatch(upsertComments(comments))
+		})
+	})
 
 
 	const comments = useAppSelector(selectComments);
@@ -26,11 +33,6 @@ export const PostItem = ({ post}: { post: Post }) => {
 		() => comments.filter((comment) => comment.postId === post.id),
 		[comments, post.id]
 	);
-		// .filter(comment => comment.postId === post.id);
-
-	useEffect(() => {
-		dispatch(loadComments(post.id));
-	}, [dispatch, post.id]);
 
 	return (
 		<div className="post-in">
