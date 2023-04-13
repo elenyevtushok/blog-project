@@ -1,8 +1,11 @@
 import { Posts } from "../features/posts/Posts"
+import { HeaderHero } from "./HeaderHero"
 
 export const MainContent = () => {
 
 	return (
+		<>
+		<HeaderHero />
 		<main>
 			<div className='content-title'>
 				<div className="content-seperator"></div>
@@ -12,5 +15,6 @@ export const MainContent = () => {
 			</div>
 			<Posts />
 		</main>
+		</>
 	)
 }

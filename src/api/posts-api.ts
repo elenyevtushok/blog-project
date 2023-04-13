@@ -14,3 +14,8 @@ export const getPostsApi = async (pageRequest: PageRequest): Promise<Post[]> => 
 export const patchPostApi = async (id: number, patch: Partial<Post>) => {
 	return await axiosClient.patch(`/posts/${id}`, patch)
 }
+
+export const getOnePostApi = async (id: number): Promise<Post> => {
+	return await axiosClient.get(`/posts/${id}`)
+		.then(response => response.data)
+}

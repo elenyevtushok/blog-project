@@ -4,21 +4,30 @@ import { Footer } from './pages/Footer'
 import { MainContent } from './pages/MainContent'
 import { store } from './app/store'
 import { Provider } from 'react-redux'
-import { HeaderHero } from './pages/HeaderHero'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+	BrowserRouter as Router,
+	Route,
+	Routes,
+} from "react-router-dom"
+import { PostPage } from './features/posts/PostPage'
 
 const queryClient = new QueryClient();
 
 function App() {
 	return (
 		<>
-			<Provider store={store}>
-				<QueryClientProvider client={queryClient}>
-					<HeaderHero />
-					<MainContent />
-					<Footer />
-				</QueryClientProvider>
-			</Provider>
+			<Router>
+				<Provider store={store}>
+					<QueryClientProvider client={queryClient}>
+						<Routes>
+							<Route path="/" element={<MainContent />} />
+							<Route path="/posts/:id" element={<PostPage />} />
+						</Routes>
+						<Footer />
+					</QueryClientProvider>
+				</Provider>
+			</Router>
 		</>
 	)
 }
