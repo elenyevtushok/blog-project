@@ -8,6 +8,7 @@ import { PostEditModal } from './PostEditModal';
 import { selectComments, upsertComments } from '../comments/commentsSlice';
 import { getCommentsApi } from '../../api/comments-api';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 
 export const PostItem = ({ post }: { post: Post }) => {
@@ -53,6 +54,8 @@ export const PostItem = ({ post }: { post: Post }) => {
 					closeModal={hideEditModal}
 					post={post}
 				/>
+				<Link to={`posts/${post.id}`} className="button">Open Post
+				</Link>
 			</div>
 		</div>
 	)
