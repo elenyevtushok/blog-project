@@ -4,11 +4,13 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { loadMorePosts, selectPosts } from './postsSlice';
 import { store } from '../../app/store';
 import { loadUsers } from '../users/usersSlice';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const FIRST_PAGE = 1;
+
 store.dispatch(loadMorePosts(FIRST_PAGE))
 store.dispatch(loadUsers())
+
 
 
 export const Posts = () => {
@@ -16,10 +18,17 @@ export const Posts = () => {
 	const posts = useAppSelector(selectPosts);
 	const dispatch = useAppDispatch();
 
+	// useEffect(() => {
+	// 	store.dispatch(loadMorePosts(FIRST_PAGE));
+	// 	store.dispatch(loadUsers());
+	// }, []);
+
 	const handleLoadMore = () => {
 		setPage(prevPage => prevPage + 1)
 		dispatch(loadMorePosts(page+1))
 	}
+
+	// const memoizedPosts = useMemo(() => posts, [posts]);
 
 	return (
 		<div className='all-posts'>
