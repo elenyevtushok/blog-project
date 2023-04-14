@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { Comment } from './dto/comment';
 
@@ -10,6 +10,9 @@ export const commentsSlice = createSlice({
 	name: 'comments',
 	initialState: commentsAdapter.getInitialState,
 	reducers: {
+		deleteComment(state, action: PayloadAction<Comment>) {
+			commentsAdapter.removeOne(state, action.payload.id);
+		},
 		upsertComments: commentsAdapter.upsertMany,
 	},
 })
@@ -19,5 +22,5 @@ export const {
 	selectAll: selectComments
 } = commentsAdapter.getSelectors((state: RootState) => state.comments);
 
-export const { upsertComments } = commentsSlice.actions
+export const { upsertComments, deleteComment } = commentsSlice.actions
 export default commentsSlice.reducer

@@ -168,7 +168,7 @@ main {
 	opacity: 0.8;
 }
 .all-comments{
-	border: 2px solid var(--hover-accent-color-second)
+	border: 2px solid var(--hover-accent-color-second);
 }
 
 .delete-post-button,
