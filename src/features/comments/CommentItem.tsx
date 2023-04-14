@@ -1,4 +1,6 @@
+import { DeleteOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '../../app/hooks';
+import { deleteComment } from './commentsSlice';
 import { Comment } from './dto/comment';
 
 
@@ -31,19 +33,19 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
 			<div className="content-seperator"></div>
 			<p className='comment-author' data-testid={`comment-name-${comment.id}`}>{comment.name}</p>
 			<p>{comment.body}</p>
-			{/* <div>
-				<button onClick={() => dispatch(deletePost(post))} className="delete-post-button" data-testid={`post-delete-button-${post.id}`}>
+			<div>
+				<button onClick={() => dispatch(deleteComment(comment))} className="delete-post-button" data-testid={`comment-delete-button-${comment.id}`}>
 					<DeleteOutlined />
 				</button>
-				<button onClick={() => setOpenEditModal(true)} className="edit-post-button" data-testid={`post-edit-button-${post.id}`}>
+				{/* <button onClick={() => setOpenEditModal(true)} className="edit-post-button" data-testid={`post-edit-button-${post.id}`}>
 					<FormOutlined />
 				</button>
 				<PostEditModal
 					open={openEditModal}
 					closeModal={hideEditModal}
 					post={post}
-				/>
-			</div> */}
+				/> */}
+			</div>
 		</div>
 	)
 }
