@@ -24,8 +24,8 @@ function App() {
 							<Route path="/" element={<MainContent />} />
 							<Route path="/posts/:id" element={<PostPage />} />
 						</Routes>
-						<Footer />
 					</QueryClientProvider>
+					<Footer />
 				</Provider>
 			</Router>
 		</>

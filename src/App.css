@@ -13,9 +13,11 @@
 }
 
 /* General Styling */
+
 #root {
+	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
-	position: relative;
 }
 
 body {
@@ -38,6 +40,20 @@ h4 {
 	color: var(--header-color);
 
 }
+.header-post-details {
+	background-color: var(--footer-background-color);
+	min-height: 50px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	padding-left: 30px;
+}
+.header-post-details-link{
+	text-decoration: none;
+	color: var(--header-color);
+	font-weight: bold;
+}
+
 
 /* Header styles */
 .header {
@@ -72,6 +88,7 @@ main {
 	max-width: 1200px;
 	margin: 0px auto;
 	padding-bottom: 100px;
+	flex: 1;
 }
 
 .content-seperator {
@@ -99,11 +116,11 @@ main {
 	margin: 0 auto 10px;
 }
 
-.post-author {
+.post-author, .comment-author {
 	font-weight: 700;
 }
 
-.post {
+.post, .comment {
 	cursor: pointer;
 	position: relative;
 	margin-bottom: 30px;
@@ -113,6 +130,11 @@ main {
 }
 
 .post .post-in {
+	background: var(--post--background-color);
+	padding: 30px 40px 55px;
+	position: relative;
+}
+.comment .comment-in {
 	background: var(--post--background-color);
 	padding: 30px 40px 55px;
 	position: relative;
@@ -144,6 +166,9 @@ main {
 .post p {
 	font-size: 14px;
 	opacity: 0.8;
+}
+.all-comments{
+	border: 2px solid var(--hover-accent-color-second)
 }
 
 .delete-post-button,
@@ -182,8 +207,6 @@ main {
 	float: right;
 	transition: all .3s;
 }
-
-
 .delete-post-button:hover,
 .load-more-button:hover,
 .edit-post-button:hover {
@@ -208,18 +231,13 @@ main {
 
 
 /* Footer styles */
+
 footer {
-	position: absolute;
-	bottom: 0;
-	min-width: 100%;
-	min-height: 50px;
 	background-color: var(--footer-background-color);
-	margin-top: 40px;
+	min-height: 50px;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-
 }
 
 .footer-content {
