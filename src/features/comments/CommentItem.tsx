@@ -1,10 +1,10 @@
 import { DeleteOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '../../app/hooks';
 import { deleteComment } from './commentsSlice';
-import { Comment } from './dto/comment';
+import { CommentDto } from '../comments/dto/Comment';
 
 
-export const CommentItem = ({ comment }: { comment: Comment }) => {
+export const CommentItem = ({ comment }: { comment: CommentDto }) => {
 
 	const dispatch = useAppDispatch();
 
