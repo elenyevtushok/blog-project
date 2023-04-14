@@ -5,27 +5,8 @@ import { Comment } from './dto/comment';
 
 
 export const CommentItem = ({ comment }: { comment: Comment }) => {
-	// const [openEditModal, setOpenEditModal] = useState(false)
-	// const hideEditModal = () => {
-	// 	setOpenEditModal(false)
-	// }
 
 	const dispatch = useAppDispatch();
-
-	// useQuery({
-	// 	queryKey: ['comments', post.id],
-	// 	queryFn: () => getCommentsApi(post.id),
-	// 	onSuccess: ((comments) => {
-	// 		dispatch(upsertComments(comments))
-	// 	})
-	// })
-
-
-	// const comments = useAppSelector(selectComments);
-	// const postComments = useMemo(
-	// 	() => comments.filter((comment) => comment.postId === post.id),
-	// 	[comments, post.id]
-	// );
 
 	return (
 		<div className="comment-in">
@@ -37,14 +18,6 @@ export const CommentItem = ({ comment }: { comment: Comment }) => {
 				<button onClick={() => dispatch(deleteComment(comment))} className="delete-post-button" data-testid={`comment-delete-button-${comment.id}`}>
 					<DeleteOutlined />
 				</button>
-				{/* <button onClick={() => setOpenEditModal(true)} className="edit-post-button" data-testid={`post-edit-button-${post.id}`}>
-					<FormOutlined />
-				</button>
-				<PostEditModal
-					open={openEditModal}
-					closeModal={hideEditModal}
-					post={post}
-				/> */}
 			</div>
 		</div>
 	)
