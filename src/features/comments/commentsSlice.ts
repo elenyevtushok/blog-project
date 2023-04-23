@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 import { CommentDto } from '../comments/dto/Comment';
 
 const commentsAdapter = createEntityAdapter<CommentDto>({
-	selectId: comment => comment.id,
+	selectId: comment => comment._id,
 })
 
 export const commentsSlice = createSlice({
@@ -11,7 +11,7 @@ export const commentsSlice = createSlice({
 	initialState: commentsAdapter.getInitialState,
 	reducers: {
 		deleteComment(state, action: PayloadAction<CommentDto>) {
-			commentsAdapter.removeOne(state, action.payload.id);
+			commentsAdapter.removeOne(state, action.payload._id);
 		},
 		upsertComments: commentsAdapter.upsertMany,
 	},

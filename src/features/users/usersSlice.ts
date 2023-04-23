@@ -4,7 +4,7 @@ import { RootState } from '../../app/store';
 import { getUsersApi } from '../../api/users-api';
 
 const usersAdapter = createEntityAdapter<User>({
-	selectId: user => user.id,
+	selectId: user => user._id,
 })
 
 export const loadUsers = createAsyncThunk(
@@ -21,7 +21,7 @@ export const usersSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(loadUsers.fulfilled, (state, action) => {	
+			.addCase(loadUsers.fulfilled, (state, action) => {
 				usersAdapter.upsertMany(state, action.payload)
 			})
 	},

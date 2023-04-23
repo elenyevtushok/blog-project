@@ -17,7 +17,7 @@ export const PostPage = () => {
 	const { id } = useParams();
 
 	const [currentPost, setCurrentPost] = useState<Post | null>(null);
-	const { data: post } = useQuery(['one-post', id], () => getOnePostApi(parseInt(id!)), {
+	const { data: post } = useQuery(['one-post', id], () => getOnePostApi(id!), {
 		onSuccess: ((post) => {
 			setCurrentPost(post);
 			console.log(post)
@@ -25,13 +25,13 @@ export const PostPage = () => {
 	});
 
 	const dispatch = useAppDispatch();
-	const user = useAppSelector(state => selectUserById(state, post?.userId || 0));
+	const user = useAppSelector(state => selectUserById(state, post?.userId || ''));
 
 
 
 	useQuery({
 		queryKey: ['comments', id],
-		queryFn: () => getCommentsApi(parseInt(id!)),
+		queryFn: () => getCommentsApi(id!),
 		onSuccess: ((comments) => {
 			dispatch(upsertComments(comments))
 		})
@@ -40,7 +40,7 @@ export const PostPage = () => {
 
 	const comments = useAppSelector(selectComments);
 	const postComments = useMemo(
-		() => comments.filter((comment) => comment.postId === parseInt(id!)),
+		() => comments.filter((comment) => comment.postId === id!),
 		[comments, id]
 	);
 
@@ -57,9 +57,9 @@ export const PostPage = () => {
 				</div>
 				<div className="post">
 					<div className="post-in">
-						<h4 data-testid={`post-title-${post?.id}`}>{post?.title}</h4>
+						<h4 data-testid={`post-title-${post?._id}`}>{post?.title}</h4>
 						<div className="content-seperator"></div>
-						<p className='post-author' data-testid={`post-author-${post?.id}`}>Written by: {user?.name}</p>
+						<p className='post-author' data-testid={`post-author-${post?._id}`}>Written by: {user?.name}</p>
 						<p>{currentPost?.body}</p>
 					</div>
 					<div className='content-title'>
@@ -70,8 +70,8 @@ export const PostPage = () => {
 					<div className='all-comments'>
 						<Row>{postComments?.map(comment => {
 							return (
-								<Col key={comment.id} xs={{ span: 16 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 20 }} xl={{ span: 22 }} className='comment'>
-									<CommentItem key={comment.id} comment={comment} />
+								<Col key={comment._id} xs={{ span: 16 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 20 }} xl={{ span: 22 }} className='comment'>
+									<CommentItem key={comment._id} comment={comment} />
 								</Col>
 							)
 						})}

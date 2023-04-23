@@ -18,7 +18,7 @@ export const Posts = () => {
 
 	const handleLoadMore = () => {
 		setPage(prevPage => prevPage + 1)
-		dispatch(loadMorePosts(page+1))
+		dispatch(loadMorePosts(page + 1))
 	}
 
 
@@ -30,13 +30,13 @@ export const Posts = () => {
 					<>
 						<Row>{posts?.map(post => {
 							return (
-								<Col key={post.id} xs={{ span: 16 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 20 }} xl={{ span: 22 }} className='post'>
-									<PostItem key={post.id} post={post} />
+								<Col key={post._id} xs={{ span: 16 }} sm={{ span: 18 }} md={{ span: 18 }} lg={{ span: 20 }} xl={{ span: 22 }} className='post'>
+									<PostItem key={post._id} post={post} />
 								</Col>
 							)
 						})}
 						</Row>
-						<button className="load-more-button" data-testid="load-more-button" onClick={()=>handleLoadMore()}>Load more posts</button>
+						<button className="load-more-button" data-testid="load-more-button" onClick={() => handleLoadMore()}>Load more posts</button>
 					</>
 				)
 			}

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_SERVER_URL = "https://jsonplaceholder.typicode.com";
+// const BASE_SERVER_URL = "https://jsonplaceholder.typicode.com";
+const BASE_SERVER_URL = "http://localhost:3000";
 
 export const axiosClient = axios.create({
 	baseURL: BASE_SERVER_URL,

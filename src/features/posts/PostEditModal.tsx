@@ -36,7 +36,7 @@ export const PostEditModal = ({ post, open, closeModal }: { post: Post, open: bo
 
 	const onFormFinish = () => {
 		const update: Update<Post> = {
-			id: post.id,
+			id: post._id,
 			changes: {
 				title: form.getFieldValue('title'),
 				body: form.getFieldValue('body')
@@ -44,7 +44,7 @@ export const PostEditModal = ({ post, open, closeModal }: { post: Post, open: bo
 		}
 
 		dispatch(updatePost(update));
-		patchPostApi(post.id, update.changes);
+		patchPostApi(post._id, update.changes);
 		closeModal();
 	}
 

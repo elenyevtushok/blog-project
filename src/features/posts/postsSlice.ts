@@ -5,7 +5,7 @@ import { getPostsApi } from '../../api/posts-api';
 
 
 const postsAdapter = createEntityAdapter<Post>({
-	selectId: post => post.id,
+	selectId: post => post._id,
 })
 
 const DEFAULT_PAGE_SIZE = 10;
@@ -26,7 +26,7 @@ export const postsSlice = createSlice({
 	initialState: postsAdapter.getInitialState,
 	reducers: {
 		deletePost(state, action: PayloadAction<Post>) {
-			postsAdapter.removeOne(state, action.payload.id);
+			postsAdapter.removeOne(state, action.payload._id);
 		},
 		updatePost: postsAdapter.updateOne
 	},
